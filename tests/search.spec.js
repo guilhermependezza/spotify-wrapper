@@ -66,7 +66,7 @@ describe('Search', () => {
 
     it('should call fetch with the correct URL', () => {
       searchAlbums('fleshgod apocalypse');
-      expect(stubbedFetch).to.have.been.calledWith('https://api.spotify.com/v1/search?q=fleshgod+apocalypse&type=artist');
+      expect(stubbedFetch).to.have.been.calledWith('https://api.spotify.com/v1/search?q=fleshgod+apocalypse&type=album');
     });
   });
 
