@@ -2,5 +2,16 @@
     "extends": "airbnb-base",
     "plugins": [
         "import"
-    ]
+    ],
+    "globals": {
+      "fetch": false,
+      "describe": false,
+      "it": false,
+      "beforeEach": false,
+      "afterEach": false,
+      "context": false
+    },
+    "rules": {
+      "comma-dangle": ["error", "never"]
+    }
 }
