@@ -1,58 +1,38 @@
 import chai, { expect } from 'chai';
-import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } from '../src/search';
-
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise from 'sinon-stub-promise';
+import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } from '../src/search';
+
 chai.use(sinonChai);
 sinonStubPromise(sinon);
 
 global.fetch = require('node-fetch');
 
 describe('Search', () => {
-  let stubbedFetch, promise;
+  let stubbedFetch;
+  let promise;
 
   beforeEach(() => {
     stubbedFetch = sinon.stub(global, 'fetch');
     promise = stubbedFetch.returnsPromise();
-  })
+  });
 
   afterEach(() => {
     stubbedFetch.restore();
-  })
+  });
 
   describe('Smoke tests', () => {
-    // search(generico) + de um tipo
-    // searchAlbums
-    // searchArtists
-    // searchTracks
-    // searchPlaylists
-
-    it('should exist method search', () => {
-      expect(search).to.exist;
-    });
-
-    it('should exist method searchAlbums', () => {
-      expect(searchAlbums).to.exist;
-    });
-
-    it('should exist method searchArtists', () => {
-      expect(searchArtists).to.exist;
-    });
-
-    it('should exist method searchTracks', () => {
-      expect(searchTracks).to.exist;
-    });
-
-    it('should exist method searchPlaylists', () => {
-      expect(searchPlaylists).to.exist;
-    });
-
-  })
+    it('should exist method search', () => expect(search).to.exist);
+    it('should exist method searchAlbums', () => expect(searchAlbums).to.exist);
+    it('should exist method searchArtists', () => expect(searchArtists).to.exist);
+    it('should exist method searchTracks', () => expect(searchTracks).to.exist);
+    it('should exist method searchPlaylists', () => expect(searchPlaylists).to.exist);
+  });
 
   describe('Generic search', () => {
     it('should call fetch function', () => {
-      const artists = search('blabla', 'blabla');
+      search('blabla', 'blabla');
       expect(stubbedFetch).to.have.been.calledOnce;
     });
 
@@ -66,7 +46,7 @@ describe('Search', () => {
       });
 
       context('passing more than one type', () => {
-        const artistsAndAlbuns = search('fleshgod apocalypse', ['artist', 'album']);
+        search('fleshgod apocalypse', ['artist', 'album']);
         expect(stubbedFetch).to.have.been.calledWith('https://api.spotify.com/v1/search?q=fleshgod+apocalypse&type=artist,album');
       });
     });
@@ -80,14 +60,14 @@ describe('Search', () => {
 
   describe('Search albums', () => {
     it('should call fetch', () => {
-      const albums = searchAlbums('Muse');
+      searchAlbums('Muse');
       expect(stubbedFetch).to.be.calledOnce;
     });
 
     it('should call fetch with the correct URL', () => {
-      const albums = searchAlbums('fleshgod apocalypse');
+      searchAlbums('fleshgod apocalypse');
       expect(stubbedFetch).to.have.been.calledWith('https://api.spotify.com/v1/search?q=fleshgod+apocalypse&type=artist');
-    })
+    });
   });
 
   describe('Search tracks', () => {
@@ -99,7 +79,7 @@ describe('Search', () => {
     it('should call fetch with the correct URL', () => {
       searchTracks('fleshgod apocalypse');
       expect(stubbedFetch).to.have.been.calledWith('https://api.spotify.com/v1/search?q=fleshgod+apocalypse&type=track');
-    })
+    });
   });
 
   describe('Search artists', () => {
