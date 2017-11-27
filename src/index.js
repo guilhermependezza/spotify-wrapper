@@ -21,4 +21,4 @@ export {
   getAlbum,
   getAlbums,
   getAlbumTracks
-}
+};
