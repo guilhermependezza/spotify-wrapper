@@ -6,4 +6,6 @@ const authHeaders = {
   }
 };
 
-export const makeAuthHeader = () => authHeaders;
+const makeAuthHeader = () => authHeaders;
+
+export default makeAuthHeader;

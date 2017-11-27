@@ -1,9 +1,9 @@
-import { makeAuthHeader } from './make-auth-header';
-import { API_URL } from './config';
+import makeAuthHeader from './make-auth-header';
+import API_URL from './config';
 import { toJson } from './utils';
 
 const makeUrl = (query, type) =>
-  `${ API_URL }/search?q=${query.replace(/ /g, '+')}&type=${type}`;
+  `${API_URL}/search?q=${query.replace(/ /g, '+')}&type=${type}`;
 
 export const search = (query, type) =>
   fetch(makeUrl(query, type), makeAuthHeader()).then(toJson);

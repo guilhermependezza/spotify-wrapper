@@ -1,5 +1,5 @@
-import { makeAuthHeader } from './make-auth-header';
-import { API_URL } from './config';
+import makeAuthHeader from './make-auth-header';
+import API_URL from './config';
 import { toJson } from './utils';
 
 export const getAlbum = id =>
