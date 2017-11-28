@@ -6,7 +6,25 @@
   </head>
   <body>
 
+    <div id="albums"></div>
 
     <script src='../dist/spotify-wrapper.umd.js'></script>
+    <script>
+      const spotify = new SpotifyWrapper({
+        token: 'BQAW4q9HbRAunPxGD5Ycr1_OQyFofW5_Jh4u5CyCVr66yrqtT-87jD2I1YMrZgXbVa6RlFmJGPbOLRW73ffC2wGeWEtaHS6C_HgFIUD6uRZC_J01bM-OnyvWzjOrrmoHWt8F7hhSfCnq'
+      });
+
+      const albums = spotify.search.albums('fleshgod apocalypse');
+      const albumsEl = document.getElementById('albums');;
+      albums
+        .then(data => data.json())
+        .then(data => {
+          const markup = data.albums.items.map(album =>
+            `<img src="${album.images[0].url}" alt="${album.name}"> `
+          ).join('');
+
+          albumsEl.innerHTML = markup;
+        });
+    </script>
   </body>
 </html>

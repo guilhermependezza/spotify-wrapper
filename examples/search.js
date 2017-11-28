@@ -1,6 +1,4 @@
 import fetch from 'node-fetch';
-import { searchAlbums } from '../src/search';
+import SpotifyWrapper from '../src/index';
 
 global.fetch = fetch;
-const albums = searchAlbums('fleshgod apocalypse');
-albums.then(data => console.log(data));

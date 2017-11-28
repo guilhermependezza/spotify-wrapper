@@ -1,17 +1,12 @@
-import makeAuthHeader from './make-auth-header';
-import API_URL from './config';
-import { toJson } from './utils';
+export default function () {
+  const makeUrl = (query, type) =>
+    `${this.apiURL}/search?q=${query.replace(/ /g, '+')}&type=${type}`;
 
-const makeUrl = (query, type) =>
-  `${API_URL}/search?q=${query.replace(/ /g, '+')}&type=${type}`;
-
-export const search = (query, type) =>
-  fetch(makeUrl(query, type), makeAuthHeader()).then(toJson);
-
-export const searchAlbums = query => search(query, 'album');
-
-export const searchTracks = query => search(query, 'track');
-
-export const searchArtists = query => search(query, 'artist');
-
-export const searchPlaylists = query => search(query, 'playlist');
+  return {
+    search: (query, type) => this.request(makeUrl(query, type)),
+    albums: query => this.search.search(query, 'album'),
+    tracks: query => this.search.search(query, 'track'),
+    artists: query => this.search.search(query, 'artist'),
+    playlists: query => this.search.search(query, 'playlist')
+  };
+}
